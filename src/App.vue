@@ -1,34 +1,15 @@
 <script setup>
-import BootcampLogo from "./assets/svg/BootcampLogo.vue"
-import HelloWorld from './components/HelloWorld.vue'
+import Cookie from "./components/Cookies/Cookie.vue";
+function clickHandler(val) {
+	console.log(val);
+}
 </script>
 
 <template>
 	<div>
-		<BootcampLogo />
-		<br />
-		<a href="https://vitejs.dev" target="_blank">
-			<img src="/vite.svg" class="logo" alt="Vite logo" />
-		</a>
-		<a href="https://vuejs.org/" target="_blank">
-			<img src="/vue.svg" class="logo vue" alt="Vue logo" />
-		</a>
+		<h1 class="text-3xl font-bold underline">Hello world!</h1>
+		<Cookie reject-button-disabled="true" @buttonClick="clickHandler" />
 	</div>
-	<HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
-}
-
-.logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style lang="postcss" scoped></style>

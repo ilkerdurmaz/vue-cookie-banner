@@ -7,17 +7,13 @@ const clickHandler = () => {
 </script>
 
 <template>
-	<button
-		class="button"
-		@click="clickHandler"
-		:disabled="props.properties.isDisabled"
-	>
+	<button class="button" @click="clickHandler">
 		{{ props.properties.title }}
 	</button>
 </template>
 
 <style lang="postcss" scoped>
 .button {
-	@apply border-2 rounded-lg p-3 bg-slate-500 text-white;
+	@apply border-2 rounded-lg px-3 py-1 bg-slate-500 text-white;
 }
 </style>

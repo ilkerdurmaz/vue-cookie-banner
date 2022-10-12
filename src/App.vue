@@ -3,12 +3,38 @@ import Cookie from "./components/Cookies/Cookie.vue";
 function clickHandler(val) {
 	console.log(val);
 }
+
+const cookieSettings = [
+	{
+		name: "option1",
+		status: true,
+	},
+	{
+		name: "option2",
+		status: true,
+	},
+	{
+		name: "option3",
+		status: true,
+	},
+	{
+		name: "option4",
+		status: true,
+	},
+	{
+		name: "option5",
+		status: true,
+	},
+];
 </script>
 
 <template>
-	<div>
-		<h1 class="text-3xl font-bold underline">Hello world!</h1>
-		<Cookie reject-button-disabled="true" @buttonClick="clickHandler" />
+	<div class="h-full">
+		<Cookie
+			:rejectButtonVisibility="true"
+			@buttonClick="clickHandler"
+			:settings="cookieSettings"
+		/>
 	</div>
 </template>
 

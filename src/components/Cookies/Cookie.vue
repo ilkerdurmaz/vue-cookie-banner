@@ -83,7 +83,7 @@ function clickHandler(value) {
 
 <template>
 	<div
-		class="flex gap-1 justify-between items-center bg-slate-400 p-3 m-3 rounded-lg absolute bottom-0"
+		class="flex gap-4 justify-between items-center bg-slate-400 p-3 m-3 rounded-lg absolute bottom-0"
 	>
 		<div>
 			<h3 class="text-xl font-semibold">Title</h3>

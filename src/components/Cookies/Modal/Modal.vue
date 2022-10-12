@@ -43,10 +43,6 @@ const tabComps = {
 								:settings="props.settings"
 							></component>
 						</div>
-						<div class="bg-slate-500 flex items-center justify-between p-3">
-							<p>Lorem ipsum dolor sit amet.</p>
-							<button class="border-2 rounded-lg p-2">Save</button>
-						</div>
 					</div>
 				</div>
 			</div>

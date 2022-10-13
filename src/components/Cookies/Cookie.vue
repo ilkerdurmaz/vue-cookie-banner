@@ -5,11 +5,12 @@ import Modal from "./Modal/Modal.vue";
 const props = defineProps({
 	title: {
 		type: String,
-		default: "Default Title"
+		default: "Default Title",
 	},
 	description: {
 		type: String,
-		default: "We baked some cookies that you have to accept, if you want to enjoy this website.It simply doesn't work without. In order to gather information and make improvements, we should use some third- party cookies too.Can we?"
+		default:
+			"We baked some cookies that you have to accept, if you want to enjoy this website.It simply doesn't work without. In order to gather information and make improvements, we should use some third- party cookies too.Can we?",
 	},
 	acceptButtonTitle: {
 		type: String,
@@ -58,7 +59,7 @@ const props = defineProps({
 	},
 });
 
-const cookieSettings = ref(false)
+const cookieSettings = ref(false);
 
 const acceptButtonProperties = {
 	title: props.acceptButtonTitle,
@@ -85,58 +86,76 @@ const openModal = ref(false);
 function clickHandler(value) {
 	if (value == settingsButtonProperties.title) {
 		openModal.value = true;
-		return
+		return;
 	}
 	if (value == acceptButtonProperties.title) {
-		cookieSettings.value = true
+		cookieSettings.value = true;
 		localStorage.setItem("cookieSettings", JSON.stringify(props.settings));
-		return
+		return;
 	}
 	if (value == rejectButtonProperties.title) {
-		cookieSettings.value = true
-
-		let updatedSettings = structuredClone(props.settings)
+		cookieSettings.value = true;
+		let updatedSettings = structuredClone(props.settings);
 
 		updatedSettings = updatedSettings.map((item) => ({
 			...item,
 			status: false,
 		}));
 
-		localStorage.setItem("cookieSettings", JSON.stringify(updatedSettings))
-		return
+		localStorage.setItem("cookieSettings", JSON.stringify(updatedSettings));
+		return;
 	}
 	emit("buttonClick", value);
 	return;
 }
 
 function saveHandler() {
-	cookieSettings.value = true
+	cookieSettings.value = true;
 }
 
 onMounted(() => {
-	cookieSettings.value = localStorage.getItem("cookieSettings")
-})
+	const setting = JSON.parse(localStorage.getItem("cookieSettings")) || [];
+	cookieSettings.value = setting.some((item) => item.status === true);
+});
 </script>
 
 <template>
 	<template v-if="!cookieSettings">
-		<div class="flex gap-4 justify-between items-center bg-primary p-3 m-3 rounded-lg absolute bottom-0">
+		<div
+			class="flex gap-4 justify-between items-center bg-primary p-3 m-3 rounded-lg absolute bottom-0"
+		>
 			<div>
 				<h3 class="text-xl font-semibold text-quaternary">{{ props.title }}</h3>
 				<p class="text-quaternary">
-					{{ props.description}}
+					{{ props.description }}
 				</p>
 			</div>
 			<div class="container">
-			<div class="button__container " :class="[rejectButtonVisibility ? 'grid-cols-3' : 'grid-cols-2']">
-				<Button :properties="acceptButtonProperties" @click="clickHandler" />
-				<Button :properties="rejectButtonProperties" @click="clickHandler" v-if="rejectButtonVisibility" />
-				<Button :properties="settingsButtonProperties" @click="clickHandler" />
-			</div></div>
+				<div
+					class="button__container"
+					:class="[rejectButtonVisibility ? 'grid-cols-3' : 'grid-cols-2']"
+				>
+					<Button :properties="acceptButtonProperties" @click="clickHandler" />
+					<Button
+						:properties="rejectButtonProperties"
+						@click="clickHandler"
+						v-if="rejectButtonVisibility"
+					/>
+					<Button
+						:properties="settingsButtonProperties"
+						@click="clickHandler"
+					/>
+				</div>
+			</div>
 		</div>
 		<div>
-			<Modal :openModal="openModal" @close="openModal = false" :settings="props.settings" :policyText="policyText"
-				@saveCookies="saveHandler" />
+			<Modal
+				:openModal="openModal"
+				@close="openModal = false"
+				:settings="props.settings"
+				:policyText="policyText"
+				@saveCookies="saveHandler"
+			/>
 		</div>
 	</template>
 </template>

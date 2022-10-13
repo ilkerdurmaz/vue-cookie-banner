@@ -25,23 +25,26 @@ const cookieSettings = [
 		name: "Option-V",
 		status: true,
 	},
-	];
+];
 
-const desc = "We baked some cookies that you have to accept, if you want to enjoy this website. It simply doesn't work without. In order to gather information and make improvements, we should use some third-party cookies too. Can we? "
+const desc =
+	"We baked some cookies that you have to accept, if you want to enjoy this website. It simply doesn't work without. In order to gather information and make improvements, we should use some third-party cookies too. Can we? ";
 
-const text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quas accusantium deleniti aliquid et recusandae dignissimos non. Delectus, nam enim placeat impedit obcaecati magnam eum. Pariatur placeat culpa nesciunt provident vitae, aperiam velit. Odio eius aperiam voluptate molestias ex impedit mollitia architecto amet incidunt id, voluptatum voluptates deserunt, minus repellat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quas accusantium deleniti aliquid et recusandae dignissimos non. Delectus, nam enim placeat impedit obcaecati magnam eum. Pariatur placeat culpa nesciunt provident vitae, aperiam velit. Odio eius aperiam voluptate molestias ex impedit mollitia architecto amet incidunt id, voluptatum voluptates deserunt, minus repellat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quas accusantium deleniti aliquid et recusandae dignissimos non. Delectus, nam enim placeat impedit obcaecati magnam eum. Pariatur placeat culpa nesciunt provident vitae, aperiam velit. Odio eius aperiam voluptate molestias ex impedit mollitia architecto amet incidunt id, voluptatum voluptates deserunt, minus repellat. "
-
+const text =
+	"Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quas accusantium deleniti aliquid et recusandae dignissimos non. Delectus, nam enim placeat impedit obcaecati magnam eum. Pariatur placeat culpa nesciunt provident vitae, aperiam velit. Odio eius aperiam voluptate molestias ex impedit mollitia architecto amet incidunt id, voluptatum voluptates deserunt, minus repellat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quas accusantium deleniti aliquid et recusandae dignissimos non. Delectus, nam enim placeat impedit obcaecati magnam eum. Pariatur placeat culpa nesciunt provident vitae, aperiam velit. Odio eius aperiam voluptate molestias ex impedit mollitia architecto amet incidunt id, voluptatum voluptates deserunt, minus repellat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quas accusantium deleniti aliquid et recusandae dignissimos non. Delectus, nam enim placeat impedit obcaecati magnam eum. Pariatur placeat culpa nesciunt provident vitae, aperiam velit. Odio eius aperiam voluptate molestias ex impedit mollitia architecto amet incidunt id, voluptatum voluptates deserunt, minus repellat. ";
 </script>
 
 <template>
 	<div class="bg-slate-500 w-screen">
-		<Cookie @buttonClick="clickHandler" :settings="cookieSettings" title="Title"
+		<Cookie
+			@buttonClick="clickHandler"
+			:settings="cookieSettings"
+			title="Title"
 			:description="desc"
 			:policyText="text"
-			:rejectButtonVisibility="false" />
+			:rejectButtonVisibility="true"
+		/>
 	</div>
 </template>
 
-<style lang="postcss" scoped>
-
-</style>
+<style lang="postcss" scoped></style>

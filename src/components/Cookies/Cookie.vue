@@ -120,18 +120,19 @@ onMounted(() => {
 
 <template>
 	<template v-if="!cookieSettings">
-		<div class="flex gap-4 justify-between items-center bg-slate-400 p-3 m-3 rounded-lg absolute bottom-0">
+		<div class="flex gap-4 justify-between items-center bg-primary p-3 m-3 rounded-lg absolute bottom-0">
 			<div>
-				<h3 class="text-xl font-semibold">{{ props.title }}</h3>
-				<p>
+				<h3 class="text-xl font-semibold text-quaternary">{{ props.title }}</h3>
+				<p class="text-quaternary">
 					{{ props.description}}
 				</p>
 			</div>
-			<div class="button__container">
+			<div class="container">
+			<div class="button__container " :class="[rejectButtonVisibility ? 'grid-cols-3' : 'grid-cols-2']">
 				<Button :properties="acceptButtonProperties" @click="clickHandler" />
 				<Button :properties="rejectButtonProperties" @click="clickHandler" v-if="rejectButtonVisibility" />
 				<Button :properties="settingsButtonProperties" @click="clickHandler" />
-			</div>
+			</div></div>
 		</div>
 		<div>
 			<Modal :openModal="openModal" @close="openModal = false" :settings="props.settings" :policyText="policyText"
@@ -142,6 +143,6 @@ onMounted(() => {
 
 <style lang="postcss" scoped>
 .button__container {
-	@apply flex gap-3;
+	@apply grid gap-2;
 }
 </style>

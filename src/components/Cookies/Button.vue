@@ -14,6 +14,6 @@ const clickHandler = () => {
 
 <style lang="postcss" scoped>
 .button {
-	@apply border-2 rounded-lg px-3 py-1 bg-slate-500 text-white;
+	@apply whitespace-nowrap border-2 border-tertiary  rounded-lg px-3 py-1 bg-secondary text-quaternary hover:bg-tertiary hover:text-primary font-bold hover:border-quaternary col-span-3 lg:col-span-1;
 }
 </style>

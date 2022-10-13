@@ -6,35 +6,39 @@ function clickHandler(val) {
 
 const cookieSettings = [
 	{
-		name: "option1",
+		name: "Option-I",
 		status: true,
 	},
 	{
-		name: "option2",
+		name: "Option-II",
 		status: true,
 	},
 	{
-		name: "option3",
+		name: "Option-III",
 		status: true,
 	},
 	{
-		name: "option4",
+		name: "Option-IV",
 		status: true,
 	},
 	{
-		name: "option5",
+		name: "Option-V",
 		status: true,
 	},
-];
+	];
+
+const desc = "We baked some cookies that you have to accept, if you want to enjoy this website. It simply doesn't work without. In order to gather information and make improvements, we should use some third-party cookies too. Can we? "
+
+const text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quas accusantium deleniti aliquid et recusandae dignissimos non. Delectus, nam enim placeat impedit obcaecati magnam eum. Pariatur placeat culpa nesciunt provident vitae, aperiam velit. Odio eius aperiam voluptate molestias ex impedit mollitia architecto amet incidunt id, voluptatum voluptates deserunt, minus repellat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quas accusantium deleniti aliquid et recusandae dignissimos non. Delectus, nam enim placeat impedit obcaecati magnam eum. Pariatur placeat culpa nesciunt provident vitae, aperiam velit. Odio eius aperiam voluptate molestias ex impedit mollitia architecto amet incidunt id, voluptatum voluptates deserunt, minus repellat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quas accusantium deleniti aliquid et recusandae dignissimos non. Delectus, nam enim placeat impedit obcaecati magnam eum. Pariatur placeat culpa nesciunt provident vitae, aperiam velit. Odio eius aperiam voluptate molestias ex impedit mollitia architecto amet incidunt id, voluptatum voluptates deserunt, minus repellat. "
+
 </script>
 
 <template>
-	<div class="h-full">
-		<Cookie :rejectButtonVisibility="true" @buttonClick="clickHandler" :settings="cookieSettings" title="Title"
-			description="We baked some cookies that you have to accept, if you want to enjoy this
-					website. It simply doesn't work without. In order to gather information
-					and make improvements, we should use some third-party cookies too. Can
-					we?" />
+	<div class="bg-slate-500 w-screen">
+		<Cookie @buttonClick="clickHandler" :settings="cookieSettings" title="Title"
+			:description="desc"
+			:policyText="text"
+			:rejectButtonVisibility="false" />
 	</div>
 </template>
 

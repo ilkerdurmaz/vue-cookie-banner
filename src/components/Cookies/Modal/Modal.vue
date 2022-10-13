@@ -20,8 +20,8 @@ function saveHandler() {
 			<div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
 				<div
 					class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-					<div class="modal-body">
-						<div class="bg-slate-500 flex justify-between p-3">
+					<div class="modal-body ">
+						<div class="bg-primary text-white flex justify-between p-3">
 							<h3 class="text-lg">Customize Cookies</h3>
 							<button @click="$emit('close')">✖</button>
 						</div>
@@ -31,7 +31,7 @@ function saveHandler() {
 							<span class="tab" :class="[selectedTab === 'Policy' ? 'tab-active' : 'tab-passive']"
 								@click="selectedTab = 'Policy'">Cookies Policy</span>
 						</div>
-						<div class="tab-content">
+						<div class="tab-content ">
 							<Policy :policyText="props.policyText" v-if="selectedTab == 'Policy'" />
 							<Settings :settings="props.settings" @saveCookies="saveHandler" v-else="selectedTab == 'Settings'" />
 						</div>
@@ -48,18 +48,20 @@ function saveHandler() {
 }
 
 .tab-active {
-	@apply border-b-slate-900 font-semibold;
+	@apply border-b-secondary text-secondary font-semibold;
 }
 
 .tab-passive {
-	@apply border-b-slate-200 cursor-pointer text-gray-500;
+	@apply border-b-tertiary cursor-pointer text-tertiary hover:text-secondary;
 }
 
 .tab-content {
-	@apply p-3 bg-gray-100;
+	@apply p-3 bg-quaternary h-[46vh];
+	
 }
 
 .modal-body {
-	height: 60vh;
+		@apply h-[60vh] bg-quaternary flex flex-col;
+
 }
 </style>

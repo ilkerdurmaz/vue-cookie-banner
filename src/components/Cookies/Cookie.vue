@@ -1,11 +1,19 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Button from "./Button.vue";
 import Modal from "./Modal/Modal.vue";
 const props = defineProps({
+	title: {
+		type: String,
+		default: "Default Title"
+	},
+	description: {
+		type: String,
+		default: "We baked some cookies that you have to accept, if you want to enjoy this website.It simply doesn't work without. In order to gather information and make improvements, we should use some third- party cookies too.Can we?"
+	},
 	acceptButtonTitle: {
 		type: String,
-		default: "Accept",
+		default: "Accept All",
 	},
 	acceptButtonTextColor: {
 		type: String,
@@ -50,6 +58,8 @@ const props = defineProps({
 	},
 });
 
+const cookieSettings = ref(false)
+
 const acceptButtonProperties = {
 	title: props.acceptButtonTitle,
 	textColor: props.acceptButtonTextColor,
@@ -73,45 +83,61 @@ const emit = defineEmits(["buttonClick", "rejectClick"]);
 const openModal = ref(false);
 
 function clickHandler(value) {
-	if (value == "Settings") {
+	if (value == settingsButtonProperties.title) {
 		openModal.value = true;
+		return
+	}
+	if (value == acceptButtonProperties.title) {
+		cookieSettings.value = true
+		localStorage.setItem("cookieSettings", JSON.stringify(props.settings));
+		return
+	}
+	if (value == rejectButtonProperties.title) {
+		cookieSettings.value = true
+
+		let updatedSettings = structuredClone(props.settings)
+
+		updatedSettings = updatedSettings.map((item) => ({
+			...item,
+			status: false,
+		}));
+
+		localStorage.setItem("cookieSettings", JSON.stringify(updatedSettings))
+		return
 	}
 	emit("buttonClick", value);
 	return;
 }
+
+function saveHandler() {
+	cookieSettings.value = true
+}
+
+onMounted(() => {
+	cookieSettings.value = localStorage.getItem("cookieSettings")
+})
 </script>
 
 <template>
-	<div
-		class="flex gap-4 justify-between items-center bg-slate-400 p-3 m-3 rounded-lg absolute bottom-0"
-	>
+	<template v-if="!cookieSettings">
+		<div class="flex gap-4 justify-between items-center bg-slate-400 p-3 m-3 rounded-lg absolute bottom-0">
+			<div>
+				<h3 class="text-xl font-semibold">{{ props.title }}</h3>
+				<p>
+					{{ props.description}}
+				</p>
+			</div>
+			<div class="button__container">
+				<Button :properties="acceptButtonProperties" @click="clickHandler" />
+				<Button :properties="rejectButtonProperties" @click="clickHandler" v-if="rejectButtonVisibility" />
+				<Button :properties="settingsButtonProperties" @click="clickHandler" />
+			</div>
+		</div>
 		<div>
-			<h3 class="text-xl font-semibold">Title</h3>
-			<p>
-				We baked some cookies that you have to accept, if you want to enjoy this
-				website. It simply doesn't work without. In order to gather information
-				and make improvements, we should use some third-party cookies too. Can
-				we?
-			</p>
+			<Modal :openModal="openModal" @close="openModal = false" :settings="props.settings" :policyText="policyText"
+				@saveCookies="saveHandler" />
 		</div>
-		<div class="button__container">
-			<Button :properties="acceptButtonProperties" @click="clickHandler" />
-			<Button
-				:properties="rejectButtonProperties"
-				@click="clickHandler"
-				v-if="rejectButtonVisibility"
-			/>
-			<Button :properties="settingsButtonProperties" @click="clickHandler" />
-		</div>
-	</div>
-	<div>
-		<Modal
-			:openModal="openModal"
-			@close="openModal = false"
-			:settings="props.settings"
-			:policyText="policyText"
-		/>
-	</div>
+	</template>
 </template>
 
 <style lang="postcss" scoped>

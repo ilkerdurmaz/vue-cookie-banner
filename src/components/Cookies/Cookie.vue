@@ -10,7 +10,7 @@ const props = defineProps({
 	description: {
 		type: String,
 		default:
-			"We baked some cookies that you have to accept, if you want to enjoy this website.It simply doesn't work without. In order to gather information and make improvements, we should use some third- party cookies too.Can we?",
+			"We baked some cookies that you have to accept, if you want to enjoy this website.It simply doesn't work without. In order to gather information and make improvements, we should use some third-party cookies too.Can we?",
 	},
 	acceptButtonTitle: {
 		type: String,
@@ -121,30 +121,45 @@ onMounted(() => {
 
 <template>
 	<template v-if="!cookieSettings">
-		<div class="flex gap-4 justify-between items-center bg-primary px-5 py-3 fixed bottom-0 w-full rounded-t-xl">
-			<div class="w-full">
-				<h3 class="text-xl font-semibold text-quaternary">{{ props.title }}</h3>
-				<p class="text-quaternary">
+		<div class="main">
+			<div class="w-full text-quaternary flex flex-col gap-y-2">
+				<h3 class="text-xl font-semibold">{{ props.title }}</h3>
+				<p class="break-words">
 					{{ props.description }}
 				</p>
 			</div>
-			<div class="container">
-				<div class="button__container" :class="[rejectButtonVisibility ? 'grid-cols-3' : 'grid-cols-2']">
-					<Button :properties="acceptButtonProperties" @click="clickHandler" />
-					<Button :properties="rejectButtonProperties" @click="clickHandler" v-if="rejectButtonVisibility" />
-					<Button :properties="settingsButtonProperties" @click="clickHandler" />
-				</div>
+
+			<div
+				class="button-container"
+				:class="[rejectButtonVisibility ? 'grid-cols-3' : 'grid-cols-2']"
+			>
+				<Button :properties="acceptButtonProperties" @click="clickHandler" />
+				<Button
+					:properties="rejectButtonProperties"
+					@click="clickHandler"
+					v-if="rejectButtonVisibility"
+				/>
+				<Button :properties="settingsButtonProperties" @click="clickHandler" />
 			</div>
 		</div>
+
 		<div>
-			<Modal :openModal="openModal" @close="openModal = false" :settings="props.settings" :policyText="policyText"
-				@saveCookies="saveHandler" />
+			<Modal
+				:openModal="openModal"
+				@close="openModal = false"
+				:settings="props.settings"
+				:policyText="policyText"
+				@saveCookies="saveHandler"
+			/>
 		</div>
 	</template>
 </template>
 
 <style lang="postcss" scoped>
-.button__container {
-	@apply grid gap-2;
+.main {
+	@apply lg:flex  items-center gap-4 bg-primary px-5 py-3 fixed bottom-0 w-full rounded-t-xl;
+}
+.button-container {
+	@apply grid gap-2 mt-3 lg:mt-0 lg:w-1/3;
 }
 </style>

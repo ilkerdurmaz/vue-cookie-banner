@@ -4,8 +4,8 @@ const props = defineProps(["setting"]);
 
 <template>
 	<div>
-		<div class="flex justify-between gap-2 px-3 py-2 ">
-			<span class="ml-3 text-sm font-medium text-secondary">{{
+		<div class="flex justify-between gap-2 p-2">
+			<span class="text-sm font-medium text-secondary">{{
 				props.setting.name
 			}}</span>
 			<label

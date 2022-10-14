@@ -39,10 +39,10 @@ const text =
 		<Cookie
 			@buttonClick="clickHandler"
 			:settings="cookieSettings"
-			title="Title"
+			title="Welcome"
 			:description="desc"
 			:policyText="text"
-			:rejectButtonVisibility="false"
+			:rejectButtonVisibility="true"
 		/>
 	</div>
 </template>

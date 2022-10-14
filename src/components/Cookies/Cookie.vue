@@ -79,18 +79,20 @@ const settingsButtonProperties = {
 	bgColor: props.settingsButtonBgColor,
 };
 
-const emit = defineEmits(["buttonClick", "rejectClick"]);
+const emit = defineEmits(["buttonClick"]);
 
 const openModal = ref(false);
 
 function clickHandler(value) {
 	if (value == settingsButtonProperties.title) {
 		openModal.value = true;
+		emit("buttonClick", value);
 		return;
 	}
 	if (value == acceptButtonProperties.title) {
 		cookieSettings.value = true;
 		localStorage.setItem("cookieSettings", JSON.stringify(props.settings));
+		emit("buttonClick", value);
 		return;
 	}
 	if (value == rejectButtonProperties.title) {
@@ -103,13 +105,14 @@ function clickHandler(value) {
 		}));
 
 		localStorage.setItem("cookieSettings", JSON.stringify(updatedSettings));
+		emit("buttonClick", value);
 		return;
 	}
-	emit("buttonClick", value);
 	return;
 }
 
 function saveHandler() {
+	emit("buttonClick", "Save and Accept");
 	cookieSettings.value = true;
 }
 

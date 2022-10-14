@@ -42,7 +42,7 @@ const text =
 			title="Title"
 			:description="desc"
 			:policyText="text"
-			:rejectButtonVisibility="true"
+			:rejectButtonVisibility="false"
 		/>
 	</div>
 </template>

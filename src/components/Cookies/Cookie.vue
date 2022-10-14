@@ -121,41 +121,24 @@ onMounted(() => {
 
 <template>
 	<template v-if="!cookieSettings">
-		<div
-			class="flex gap-4 justify-between items-center bg-primary p-3 m-3 rounded-lg absolute bottom-0"
-		>
-			<div>
+		<div class="flex gap-4 justify-between items-center bg-primary px-5 py-3 fixed bottom-0 w-full rounded-t-xl">
+			<div class="w-full">
 				<h3 class="text-xl font-semibold text-quaternary">{{ props.title }}</h3>
 				<p class="text-quaternary">
 					{{ props.description }}
 				</p>
 			</div>
 			<div class="container">
-				<div
-					class="button__container"
-					:class="[rejectButtonVisibility ? 'grid-cols-3' : 'grid-cols-2']"
-				>
+				<div class="button__container" :class="[rejectButtonVisibility ? 'grid-cols-3' : 'grid-cols-2']">
 					<Button :properties="acceptButtonProperties" @click="clickHandler" />
-					<Button
-						:properties="rejectButtonProperties"
-						@click="clickHandler"
-						v-if="rejectButtonVisibility"
-					/>
-					<Button
-						:properties="settingsButtonProperties"
-						@click="clickHandler"
-					/>
+					<Button :properties="rejectButtonProperties" @click="clickHandler" v-if="rejectButtonVisibility" />
+					<Button :properties="settingsButtonProperties" @click="clickHandler" />
 				</div>
 			</div>
 		</div>
 		<div>
-			<Modal
-				:openModal="openModal"
-				@close="openModal = false"
-				:settings="props.settings"
-				:policyText="policyText"
-				@saveCookies="saveHandler"
-			/>
+			<Modal :openModal="openModal" @close="openModal = false" :settings="props.settings" :policyText="policyText"
+				@saveCookies="saveHandler" />
 		</div>
 	</template>
 </template>
